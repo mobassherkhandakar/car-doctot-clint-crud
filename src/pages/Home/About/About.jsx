@@ -13,7 +13,8 @@ const About = () => {
             className=" absolute -bottom-10 w-1/2 border-8 border-white -right-10 rounded-lg shadow-2xl"
           />
         </div>
-        <div className="w-1/2 ms-10">
+        <div className="w-1/2 ms-10 space-y-3">
+          <h1 className="text-3xl  font-bold text-orange-600">About</h1>
           <h1 className="text-5xl font-bold">
             We are qualified & of experience in this field
           </h1>
