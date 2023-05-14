@@ -15,7 +15,12 @@ const Header = () => {
   const navItems = <>
     <li><Link>Home</Link></li>
     <li><Link>Blog</Link></li>
-    {user?.email ? <li><Link onClick={handleLogOut}>Log Out</Link></li> : <li><Link to="/login">Login</Link></li>}
+    {user?.email ? 
+    <>
+    <li><Link to="/booking">My-Booking</Link></li>
+    <li><Link onClick={handleLogOut}>Log Out</Link></li>
+    </> : 
+    <li><Link to="/login">Login</Link></li>}
     <li><Link>About</Link></li>
   </>
   return (

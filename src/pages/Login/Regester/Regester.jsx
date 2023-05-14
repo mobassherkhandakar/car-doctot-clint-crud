@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import img from "../../../assets/images/login/login.svg";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Regester = () => {
   const {createUser} = useContext(AuthContext)
@@ -16,6 +17,12 @@ const Regester = () => {
     .then(rusult=>{
       const user = rusult.user;
       console.log(user);
+      Swal.fire({
+        icon: "success",
+        title: "Your Regester has been done",
+        showConfirmButton: false,
+        timer: 1500,
+      });      
     })
     .catch(error=> {
       console.log(error.message);
@@ -63,11 +70,6 @@ const Regester = () => {
                     placeholder="password"
                     className="input input-bordered"
                   />
-                  <label className="label">
-                    <a href="#" className="label-text-alt link link-hover">
-                      Forgot password?
-                    </a>
-                  </label>
                 </div>
                 <div className="form-control mt-6">
                   <button type="submit" className="btn btn-primary">Regester</button>
