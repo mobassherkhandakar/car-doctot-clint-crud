@@ -1,19 +1,24 @@
 import React, { useContext, useState } from "react";
 import img from "../../../assets/images/login/login.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { fromJSON } from "postcss";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  // console.log(location);
+  const form = location.state?.from?.pathname || "/";
+  const navigete = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const from = e.target;
     const email = from.email.value;
     const password = from.password.value;
-    console.log( email, password);
+    console.log(email, password);
     setError("");
     loginUser(email, password)
       .then((rusult) => {
@@ -24,6 +29,22 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        const logdingUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(logdingUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log("jwt data", data);
+            localStorage.setItem("car-access-token", data.token);
+            navigete(form, { replace: true });
+          });
       })
       .catch((error) => {
         setError(error.message);
