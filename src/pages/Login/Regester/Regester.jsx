@@ -3,6 +3,7 @@ import img from "../../../assets/images/login/login.svg";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const Regester = () => {
   const {createUser} = useContext(AuthContext)
@@ -76,6 +77,7 @@ const Regester = () => {
                 </div>
                 <p className="text-center">Already Have an acount <Link to='/login' className="mt-5 font-bold text-orange-600">Login</Link> </p>
               </form>
+              <SocialLogin/>
             </div>
           </div>
         </div>

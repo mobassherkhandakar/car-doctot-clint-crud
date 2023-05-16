@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const CheckOut = () => {
-  const { title, _id, price , img} = useLoaderData();
+  const { title, _id, price, img } = useLoaderData();
   const { user } = useContext(AuthContext);
 
   const handleOrderSubmit = (e) => {
@@ -20,20 +20,20 @@ const CheckOut = () => {
       price,
       img,
       service: title,
-      service_id: _id
-    }
+      service_id: _id,
+    };
 
-    fetch('http://localhost:5000/booking',{
-      method: 'POST',
+    fetch("https://car-doctor-server-ecru-nine.vercel.app/booking", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(booking)
+      body: JSON.stringify(booking),
     })
-    .then(res=> res.json())
-    .then(data=> {
-      console.log(data);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
   console.log(user);
   return (

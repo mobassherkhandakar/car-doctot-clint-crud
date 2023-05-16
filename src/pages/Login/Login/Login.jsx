@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import { fromJSON } from "postcss";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -29,22 +30,9 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        const logdingUser = {
-          email: user.email,
-        };
-        fetch("http://localhost:5000/jwt", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(logdingUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log("jwt data", data);
-            localStorage.setItem("car-access-token", data.token);
-            navigete(form, { replace: true });
-          });
+        
+        
+          navigete(form, { replace: true });
       })
       .catch((error) => {
         setError(error.message);
@@ -93,14 +81,15 @@ const Login = () => {
                     Login
                   </button>
                 </div>
-                <p className="text-center">
+                <p className="text-center mt-3">
                   Don't have an account
-                  <Link to="/signup" className="mt-5 font-bold text-orange-600">
+                  <Link to="/signup" className="font-bold text-orange-600">
                     Regester
                   </Link>
                 </p>
               </form>
               <p className="text-red-600">{error}</p>
+              <SocialLogin/>
             </div>
           </div>
         </div>

@@ -10,29 +10,41 @@ import PriveteRoute from "./PriveteRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main/>,
+    element: <Main />,
     children: [
       {
         path: "/",
-        element: <Home/>
+        element: <Home />,
       },
       {
         path: "login",
-        element: <Login/>
+        element: <Login />,
       },
       {
         path: "signup",
-        element: <Regester/>
+        element: <Regester />,
       },
       {
         path: "/cheakout/:id",
-        element: <PriveteRoute><CheckOut/></PriveteRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+        element: (
+          <PriveteRoute>
+            <CheckOut />
+          </PriveteRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://car-doctor-server-ecru-nine.vercel.app/services/${params.id}`
+          ),
       },
       {
-        path: '/booking',
-        element: <PriveteRoute> <Booking/></PriveteRoute>
-      }
-    ]
-  }
-])
+        path: "/booking",
+        element: (
+          <PriveteRoute>
+            {" "}
+            <Booking />
+          </PriveteRoute>
+        ),
+      },
+    ],
+  },
+]);
